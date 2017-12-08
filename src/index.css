@@ -1,0 +1,64 @@
+table.r-responsive-table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+}
+
+table.r-responsive-table tr {
+    /* background: #f8f8f8; */
+    border: 1px solid #ddd;
+    padding: 0.35em;
+}
+table.r-responsive-table th,
+table.r-responsive-table td {
+    padding: 0.625em;
+    text-align: center;
+}
+table.r-responsive-table th {
+    font-size: 0.85em;
+    /* letter-spacing: 0.1em; */
+    /* text-transform: uppercase; */
+}
+table.r-responsive-table .tdBefore {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    table.r-responsive-table {
+        border: 0;
+    }
+
+    table.r-responsive-table thead {
+        border: none;
+        /* clip: rect(0 0 0 0); */
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+    table.r-responsive-table tr {
+        border-bottom: 3px solid #ddd;
+        display: block;
+        margin-bottom: 0.625em;
+    }
+    table.r-responsive-table td {
+        border-bottom: 1px solid #ddd;
+        display: block;
+        font-size: 0.8em;
+        text-align: right;
+    }
+    table.r-responsive-table .tdBefore {
+        display: initial;
+        float: left;
+        font-weight: bold;
+        /* text-transform: uppercase; */
+    }
+    table.r-responsive-table td:last-child {
+        border-bottom: 0;
+    }
+}
