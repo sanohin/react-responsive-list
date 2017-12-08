@@ -8,7 +8,7 @@ React Responsive List converts your table data to a user-friendly list in mobile
 * [Demo & Examples](#demo--examples)
 * [Installation](#installation)
 * [Usage](#usage)
-* [Development](#development-src-lib-and-the-build-process)
+* [Development](#development)
 * [License](#license)
 
 
@@ -104,7 +104,7 @@ import 'react-responsive-list/dist/index.css'
 
 ```
 
-## Development (`src`, `dist` and the build process)
+## Development
 
 **NOTE:** The source code for the component is in `src`. A transpiled version (generated with Babel) is available in `dist`, which can be included without the need for any build system.
 
