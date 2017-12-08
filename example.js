@@ -48,12 +48,12 @@ class App extends Component {
 const headerCode = `
 <div>
     <h2>Try Me</h2>
-    <p>Resize to mobile to pivot this super resposive table</p>
+    <p>Resize to mobile to pivot this resposive table</p>
     <Table>
     <Thead>
       <Tr>
-        <Th style={{ width: 400 }}>Event</Th>
-        <Th><div>Date</div></Th>
+        <Th>Event</Th>
+        <Th>Date</Th>
         <Th>Location</Th>
         <Th>Organizer</Th>
         <Th>Theme</Th>
@@ -62,9 +62,7 @@ const headerCode = `
     </Thead>
     <Tbody>
       <Tr>
-        <Td>
-        <img src={'http://images.all-free-download.com/images/graphiclarge/hd_sky_picture_05_hd_pictures_166299.jpg'} style={{ width: 400 }} />
-        </Td>
+        <Td>YGLF</Td>
         <Td>4/9/2018</Td>
         <Td>East Annex</Td>
         <Td>Crimson.js</Td>
