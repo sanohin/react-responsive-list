@@ -3,6 +3,7 @@
 
 React Responsive List converts your table data to a user-friendly list in mobile view.
 
+It's lightweight, has no dependencies and pretty flexible.
 
 ## Documentation
 * [Demo & Examples](#demo--examples)
@@ -40,13 +41,15 @@ npm install react-responsive-list --save
 
 To use, import { Table, Thead, Tbody, Tr, Th, Td } from 'react-responsive-list'.. Then, copy or import the index.css file into your project. Write your html table with capitol letters, and voilà!
 
+`Table` supports `breakPoint` prop, which will set, when to make your table mobile. Default is 600.
+
 ```jsx
 import React from 'react'
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-responsive-list'
 import 'react-responsive-list/dist/index.css'
 
 ...
-<Table>
+<Table breakPoint={700}>
   <Thead>
   	<Tr>
 			<Th>Annual Conference</Th>

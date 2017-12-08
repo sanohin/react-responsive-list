@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import provideContext from './provideContext';
 import withContext from './withContext';
-import { allowed } from './helpers';
+import { allowed, randomString, getCssString } from './helpers';
 
-const contextKey = '_responsiveTable'
+const contextKey = '_responsiveTable';
 
 const contextShape = PropTypes.shape({ headers: PropTypes.object });
 const TableContext = provideContext(contextKey, contextShape);
@@ -14,14 +14,55 @@ export class Table extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            headers: {}
+            headers: {},
+            prefix: ''
         };
     }
+
+    componentDidMount() {
+        this.setState();
+        const prefix = randomString();
+        this.setState({ prefix }, () => {
+            const head =
+                document.head || document.getElementsByTagName('head')[0];
+            this.style = document.createElement('style');
+            this.style.type = 'text/css';
+            this.style.setAttribute('data-id', prefix);
+            this.updateStyles(this.props.breakPoint, prefix);
+            head.appendChild(this.style);
+        });
+    }
+
+    componentWillReceiveProps({ breakPoint }) {
+        if (this.props.breakPoint !== breakPoint) {
+            this.updateStyles(breakPoint, this.state.prefix);
+        }
+    }
+
+    componentWillUnmount() {
+        const head = document.head || document.getElementsByTagName('head')[0];
+        head.removeChild(this.style);
+    }
+
+    updateStyles(breakPoint, prefix) {
+        const { style } = this;
+        const css = getCssString(prefix, breakPoint);
+        if (style.styleSheet) {
+            style.styleSheet.cssText = css;
+        } else {
+            while (style.hasChildNodes()) {
+                style.removeChild(style.lastChild);
+            }
+            style.appendChild(document.createTextNode(css));
+        }
+    }
+
     render() {
-        const { headers } = this.state;
+        const { headers, prefix } = this.state;
         const className =
             (this.props.className ? this.props.className + ' ' : '') +
-            'r-responsive-table';
+            'r-responsive-table ' +
+            prefix;
         return (
             <TableContext headers={headers}>
                 <table {...allowed(this.props)} className={className} />
@@ -29,6 +70,14 @@ export class Table extends React.Component {
         );
     }
 }
+
+Table.defaultProps = {
+    breakPoint: 600
+};
+
+Table.propTypes = {
+    breakPoint: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+};
 
 export const Thead = props => (
     <thead {...allowed(props)}>

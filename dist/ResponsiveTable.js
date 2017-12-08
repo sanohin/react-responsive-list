@@ -52,17 +52,66 @@ var Table = exports.Table = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Table.__proto__ || Object.getPrototypeOf(Table)).call(this, props));
 
         _this.state = {
-            headers: {}
+            headers: {},
+            prefix: ''
         };
         return _this;
     }
 
     _createClass(Table, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            this.setState();
+            var prefix = (0, _helpers.randomString)();
+            this.setState({ prefix: prefix }, function () {
+                var head = document.head || document.getElementsByTagName('head')[0];
+                _this2.style = document.createElement('style');
+                _this2.style.type = 'text/css';
+                _this2.style.setAttribute('data-id', prefix);
+                _this2.updateStyles(_this2.props.breakPoint, prefix);
+                head.appendChild(_this2.style);
+            });
+        }
+    }, {
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(_ref) {
+            var breakPoint = _ref.breakPoint;
+
+            if (this.props.breakPoint !== breakPoint) {
+                this.updateStyles(breakPoint, this.state.prefix);
+            }
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            var head = document.head || document.getElementsByTagName('head')[0];
+            head.removeChild(this.style);
+        }
+    }, {
+        key: 'updateStyles',
+        value: function updateStyles(breakPoint, prefix) {
+            var style = this.style;
+
+            var css = (0, _helpers.getCssString)(prefix, breakPoint);
+            if (style.styleSheet) {
+                style.styleSheet.cssText = css;
+            } else {
+                while (style.hasChildNodes()) {
+                    style.removeChild(style.lastChild);
+                }
+                style.appendChild(document.createTextNode(css));
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
-            var headers = this.state.headers;
+            var _state = this.state,
+                headers = _state.headers,
+                prefix = _state.prefix;
 
-            var className = (this.props.className ? this.props.className + ' ' : '') + 'r-responsive-table';
+            var className = (this.props.className ? this.props.className + ' ' : '') + 'r-responsive-table ' + prefix;
             return _react2.default.createElement(
                 TableContext,
                 { headers: headers },
@@ -73,6 +122,14 @@ var Table = exports.Table = function (_React$Component) {
 
     return Table;
 }(_react2.default.Component);
+
+Table.defaultProps = {
+    breakPoint: 600
+};
+
+Table.propTypes = {
+    breakPoint: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
 
 var Thead = exports.Thead = function Thead(props) {
     return _react2.default.createElement(
@@ -88,7 +145,7 @@ var TrInner = function (_React$Component2) {
     function TrInner(props) {
         _classCallCheck(this, TrInner);
 
-        var _this2 = _possibleConstructorReturn(this, (TrInner.__proto__ || Object.getPrototypeOf(TrInner)).call(this, props));
+        var _this3 = _possibleConstructorReturn(this, (TrInner.__proto__ || Object.getPrototypeOf(TrInner)).call(this, props));
 
         var headers = props._responsiveTable.headers;
 
@@ -97,7 +154,7 @@ var TrInner = function (_React$Component2) {
                 headers[i] = child.props.children;
             });
         }
-        return _this2;
+        return _this3;
     }
 
     _createClass(TrInner, [{
