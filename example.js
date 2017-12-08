@@ -2,14 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import styled, { css } from 'styled-components';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
-import {
-    Table,
-    Thead,
-    Tbody,
-    Tr,
-    Th,
-    Td
-} from '../dist/ResponsiveTable.js';
+import { Table, Thead, Tbody, Tr, Th, Td } from '../dist/ResponsiveTable.js';
 import '../dist/index.css';
 
 class App extends Component {
@@ -49,7 +42,7 @@ const headerCode = `
 <div>
     <h2>Try Me</h2>
     <p>Resize to mobile to pivot this resposive table</p>
-    <Table>
+    <Table breakPoint={1000}>
     <Thead>
       <Tr>
         <Th>Event</Th>

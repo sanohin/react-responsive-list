@@ -89,23 +89,80 @@ var Table = exports.Table = function (_React$Component) {
         var _this = _possibleConstructorReturn(this, (Table.__proto__ || Object.getPrototypeOf(Table)).call(this, props));
 
         _this.state = {
-            headers: {}
+            headers: {},
+            prefix: ''
         };
         return _this;
     }
 
     _createClass(Table, [{
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this2 = this;
+
+            this.setState();
+            var prefix = (0, _helpers.randomString)();
+            this.setState({ prefix: prefix }, function () {
+                var head = document.head || document.getElementsByTagName('head')[0];
+                _this2.style = document.createElement('style');
+                _this2.style.type = 'text/css';
+                _this2.style.setAttribute('data-id', prefix);
+                _this2.updateStyles(_this2.props.breakPoint, prefix);
+                head.appendChild(_this2.style);
+            });
+        }
+    }, {
+        key: 'componentWillReceiveProps',
+        value: function componentWillReceiveProps(_ref) {
+            var breakPoint = _ref.breakPoint;
+
+            if (this.props.breakPoint !== breakPoint) {
+                this.updateStyles(breakPoint, this.state.prefix);
+            }
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            var head = document.head || document.getElementsByTagName('head')[0];
+            head.removeChild(this.style);
+        }
+    }, {
+        key: 'updateStyles',
+        value: function updateStyles(breakPoint, prefix) {
+            var style = this.style;
+
+            var css = (0, _helpers.getCssString)(prefix, breakPoint);
+            if (style.styleSheet) {
+                style.styleSheet.cssText = css;
+            } else {
+                while (style.hasChildNodes()) {
+                    style.removeChild(style.lastChild);
+                }
+                style.appendChild(document.createTextNode(css));
+            }
+        }
+    }, {
         key: 'render',
         value: function render() {
-            var headers = this.state.headers;
+            var _state = this.state,
+                headers = _state.headers,
+                prefix = _state.prefix;
 
-            var className = (this.props.className ? this.props.className + ' ' : '') + 'r-responsive-table';
+            var className = (this.props.className ? this.props.className + ' ' : '') + 'r-responsive-table ' + prefix;
             return _react2.default.createElement(TableContext, { headers: headers }, _react2.default.createElement('table', _extends({}, (0, _helpers.allowed)(this.props), { className: className })));
         }
     }]);
 
     return Table;
 }(_react2.default.Component);
+
+Table.defaultProps = {
+    breakPoint: 600
+};
+
+Table.propTypes = {
+    breakPoint: _propTypes2.default.oneOfType([_propTypes2.default.string, _propTypes2.default.number])
+};
 
 var Thead = exports.Thead = function Thead(props) {
     return _react2.default.createElement('thead', (0, _helpers.allowed)(props), _react2.default.cloneElement(props.children, { inHeader: true }));
@@ -117,7 +174,7 @@ var TrInner = function (_React$Component2) {
     function TrInner(props) {
         _classCallCheck(this, TrInner);
 
-        var _this2 = _possibleConstructorReturn(this, (TrInner.__proto__ || Object.getPrototypeOf(TrInner)).call(this, props));
+        var _this3 = _possibleConstructorReturn(this, (TrInner.__proto__ || Object.getPrototypeOf(TrInner)).call(this, props));
 
         var headers = props._responsiveTable.headers;
 
@@ -126,7 +183,7 @@ var TrInner = function (_React$Component2) {
                 headers[i] = child.props.children;
             });
         }
-        return _this2;
+        return _this3;
     }
 
     _createClass(TrInner, [{
@@ -215,11 +272,19 @@ var omit = exports.omit = function omit(obj, omitProps) {
 };
 
 var allowed = exports.allowed = function allowed(props) {
-    return omit(props, ['inHeader', 'columnKey', '_responsiveTable']);
+    return omit(props, ['inHeader', 'columnKey', '_responsiveTable', 'breakPoint']);
+};
+
+var randomString = exports.randomString = function randomString() {
+    return 'a' + Math.random().toString(36).substring(7);
+};
+
+var getCssString = exports.getCssString = function getCssString(className, breakPoint) {
+    return '\n@media screen and (max-width: ' + breakPoint + 'px) {\n    table.r-responsive-table.' + className + ' {\n        border: 0;\n    }\n\n    table.r-responsive-table.' + className + ' thead {\n        border: none;\n        /* clip: rect(0 0 0 0); */\n        height: 1px;\n        margin: -1px;\n        overflow: hidden;\n        padding: 0;\n        position: absolute;\n        width: 1px;\n    }\n    table.r-responsive-table.' + className + ' tr {\n        border-bottom: 3px solid #ddd;\n        display: block;\n        margin-bottom: 0.625em;\n    }\n    table.r-responsive-table.' + className + ' td {\n        border-bottom: 1px solid #ddd;\n        display: block;\n        font-size: 0.8em;\n        text-align: right;\n    }\n    table.r-responsive-table.' + className + ' .tdBefore {\n        display: initial;\n        float: left;\n        font-weight: bold;\n        /* text-transform: uppercase; */\n    }\n    table.r-responsive-table.' + className + ' td:last-child {\n        border-bottom: 0;\n    }\n}\n';
 };
 
 },{}],3:[function(require,module,exports){
-var css = "table.r-responsive-table{border:1px solid #ccc;border-collapse:collapse;margin:0;padding:0;width:100%;table-layout:fixed}table.r-responsive-table tr{border:1px solid #ddd;padding:.35em}table.r-responsive-table td,table.r-responsive-table th{padding:.625em;text-align:center}table.r-responsive-table th{font-size:.85em}table.r-responsive-table .tdBefore{display:none}@media screen and (max-width:600px){table.r-responsive-table{border:0}table.r-responsive-table thead{border:none;height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}table.r-responsive-table tr{border-bottom:3px solid #ddd;display:block;margin-bottom:.625em}table.r-responsive-table td{border-bottom:1px solid #ddd;display:block;font-size:.8em;text-align:right}table.r-responsive-table .tdBefore{display:initial;float:left;font-weight:700}table.r-responsive-table td:last-child{border-bottom:0}}"; (require("browserify-css").createStyle(css, { "href": "dist/index.css" }, { "insertAt": "bottom" })); module.exports = css;
+var css = "table.r-responsive-table{border:1px solid #ccc;border-collapse:collapse;margin:0;padding:0;width:100%;table-layout:fixed}table.r-responsive-table tr{border:1px solid #ddd;padding:.35em}table.r-responsive-table td,table.r-responsive-table th{padding:.625em;text-align:center}table.r-responsive-table th{font-size:.85em}table.r-responsive-table .tdBefore{display:none}"; (require("browserify-css").createStyle(css, { "href": "dist/index.css" }, { "insertAt": "bottom" })); module.exports = css;
 },{"browserify-css":8}],4:[function(require,module,exports){
 'use strict';
 
@@ -494,7 +559,7 @@ var App = function (_Component) {
     return App;
 }(_react.Component);
 
-var headerCode = '\n<div>\n    <h2>Try Me</h2>\n    <p>Resize to mobile to pivot this resposive table</p>\n    <Table>\n    <Thead>\n      <Tr>\n        <Th>Event</Th>\n        <Th>Date</Th>\n        <Th>Location</Th>\n        <Th>Organizer</Th>\n        <Th>Theme</Th>\n        <Th>Agent</Th>\n      </Tr>\n    </Thead>\n    <Tbody>\n      <Tr>\n        <Td>YGLF</Td>\n        <Td>4/9/2018</Td>\n        <Td>East Annex</Td>\n        <Td>Crimson.js</Td>\n        <Td>Javascript</Td>\n        <Td>Coston Perkins</Td>\n      </Tr>\n      <Tr>\n        <Td>Capstone Data</Td>\n        <Td>5/19/2018</Td>\n        <Td>205 Gorgas</Td>\n        <Td>OIRA</Td>\n        <Td>Data Scence</Td>\n        <Td>Jason Phillips</Td>\n      </Tr>\n      <Tr>\n        <Td>Tuscaloosa D3</Td>\n        <Td>5/31/2018</Td>\n        <Td>Monarch Cafe</Td>\n        <Td>Crimson.js</Td>\n        <Td>Data Viz</Td>\n        <Td>Michael Fox</Td>\n      </Tr>\n    </Tbody>\n  </Table>\n</div>\n\n'.trim();
+var headerCode = '\n<div>\n    <h2>Try Me</h2>\n    <p>Resize to mobile to pivot this resposive table</p>\n    <Table breakPoint={1000}>\n    <Thead>\n      <Tr>\n        <Th>Event</Th>\n        <Th>Date</Th>\n        <Th>Location</Th>\n        <Th>Organizer</Th>\n        <Th>Theme</Th>\n        <Th>Agent</Th>\n      </Tr>\n    </Thead>\n    <Tbody>\n      <Tr>\n        <Td>YGLF</Td>\n        <Td>4/9/2018</Td>\n        <Td>East Annex</Td>\n        <Td>Crimson.js</Td>\n        <Td>Javascript</Td>\n        <Td>Coston Perkins</Td>\n      </Tr>\n      <Tr>\n        <Td>Capstone Data</Td>\n        <Td>5/19/2018</Td>\n        <Td>205 Gorgas</Td>\n        <Td>OIRA</Td>\n        <Td>Data Scence</Td>\n        <Td>Jason Phillips</Td>\n      </Tr>\n      <Tr>\n        <Td>Tuscaloosa D3</Td>\n        <Td>5/31/2018</Td>\n        <Td>Monarch Cafe</Td>\n        <Td>Crimson.js</Td>\n        <Td>Data Viz</Td>\n        <Td>Michael Fox</Td>\n      </Tr>\n    </Tbody>\n  </Table>\n</div>\n\n'.trim();
 
 var LiveEdit = (0, _styledComponents2.default)(_reactLive.LiveEditor)(_templateObject);
 
