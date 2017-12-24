@@ -1,8 +1,3 @@
-/*
-// Examples Stylesheet
-// -------------------
-*/
-
 body {
 	font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
 	font-size: 14px;
@@ -49,9 +44,3 @@ label {
 	margin: 1em 0;
 	text-transform: uppercase;
 }
-/* table {
-	max-width: 800;
-}
-th {
-	text-align: left;
-} */

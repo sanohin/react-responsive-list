@@ -25,7 +25,7 @@ npm install
 npm start
 ```
 
-Then open [`localhost:8000`](http://localhost:8000) in a browser.
+Then open [`localhost:1234`](http://localhost:1234) in a browser.
 
 
 ## Installation
@@ -46,7 +46,7 @@ To use, import { Table, Thead, Tbody, Tr, Th, Td } from 'react-responsive-list'.
 ```jsx
 import React from 'react'
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-responsive-list'
-import 'react-responsive-list/dist/index.css'
+import 'react-responsive-list/assets/index.css'
 
 ...
 <Table breakPoint={700}>

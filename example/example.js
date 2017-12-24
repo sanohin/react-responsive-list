@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import styled, { css } from 'styled-components';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
-import { Table, Thead, Tbody, Tr, Th, Td } from '../dist/ResponsiveTable.js';
-import '../dist/index.css';
+import { Table, Thead, Tbody, Tr, Th, Td } from '../dist/ResponsiveTable.es.js';
+import '../assets/index.css';
 
 class App extends Component {
     render() {
