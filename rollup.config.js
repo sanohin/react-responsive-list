@@ -35,10 +35,7 @@ export default {
     exports: 'named',
     plugins: [
         rollupBabel({
-            exclude: 'node_modules/**',
-            babelrc: false,
-            presets: ['react', ['es2015', { modules: false }]],
-            plugins: ['transform-object-rest-spread', 'external-helpers']
+            exclude: 'node_modules/**'
         })
     ],
     external: ['react', 'react-dom', 'prop-types'],

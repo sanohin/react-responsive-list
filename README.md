@@ -1,4 +1,4 @@
-# React Responsive List(Table)
+# React Responsive List (Table) 📋
 
 
 React Responsive List converts your table data to a user-friendly list in mobile view.
@@ -48,73 +48,73 @@ import React from 'react'
 import { Table, Thead, Tbody, Tr, Th, Td } from 'react-responsive-list'
 import 'react-responsive-list/assets/index.css'
 
-...
-<Table breakPoint={700}>
-  <Thead>
-  	<Tr>
-			<Th>Annual Conference</Th>
-			<Th>Year</Th>
-			<Th>Location</Th>
-			<Th>President</Th>
-			<Th>Program Chair</Th>
-			<Th>Conference Theme</Th>
-		</Tr>
-	</Thead>
-	<Tbody>
-		<Tr>
-			<Td>31</Td>
-			<Td>2017</Td>
-			<Td>Alabama Community College System (ACCS)</Td>
-			<Td>Mr. Toner Evans, Samford University</Td>
-			<Td>Ms. Kelly Birchfield, Auburn University Montgomery</Td>
-			<Td />
-		</Tr>
-		<Tr>
-			<Td>30</Td>
-			<Td>2016</Td>
-			<Td>Samford University</Td>
-			<Td>Ms. Angel Jowers, University of West Alabama</Td>
-			<Td>Mr. Toner Evans, Samford University</Td>
-			<Td>Academ(ia) Awards: Best Practices/Performances in IR</Td>
-		</Tr>
-		<Tr>
-			<Td>29</Td>
-			<Td>2015</Td>
-			<Td>Eufaula (Wallace Community College Dothan)</Td>
-			<Td>Dr. Annette Cederholm, Snead State Community College</Td>
-			<Td>Ms. Angel Jowers, University of West Alabama</Td>
-			<Td>Back to the Future</Td>
-		</Tr>
-		<Tr>
-			<Td>28</Td>
-			<Td>2014</Td>
-			<Td>Huntsville (J.F. Drake State Community and Technical College)</Td>
-			<Td>Dr. Jon C. Acker, The University of Alabama</Td>
-			<Td>Dr. Annette Cederholm, Snead State Community College</Td>
-			<Td>Institutional Research…and Beyond!</Td>
-		</Tr>
-		<Tr>
-			<Td>27</Td>
-			<Td>2013</Td>
-			<Td>The University of Alabama</Td>
-			<Td>Mr. John McIntosh, Northwest-Shoals Community College</Td>
-			<Td>Dr. Jon C. Acker, The University of Alabama</Td>
-			<Td>Moving the Ball Forward</Td>
-		</Tr>
-	</Tbody>
-</Table>
-...
+const MyAwesomeTable = () => (
+    <Table breakPoint={700}>
+        <Thead>
+            <Tr>
+                <Th>Annual Conference</Th>
+                <Th>Year</Th>
+                <Th>Location</Th>
+                <Th>President</Th>
+                <Th>Program Chair</Th>
+                <Th>Conference Theme</Th>
+            </Tr>
+        </Thead>
+        <Tbody>
+            <Tr>
+                <Td>31</Td>
+                <Td>2017</Td>
+                <Td>Alabama Community College System (ACCS)</Td>
+                <Td>Mr. Toner Evans, Samford University</Td>
+                <Td>Ms. Kelly Birchfield, Auburn University Montgomery</Td>
+                <Td />
+            </Tr>
+            <Tr>
+                <Td>30</Td>
+                <Td>2016</Td>
+                <Td>Samford University</Td>
+                <Td>Ms. Angel Jowers, University of West Alabama</Td>
+                <Td>Mr. Toner Evans, Samford University</Td>
+                <Td>Academ(ia) Awards: Best Practices/Performances in IR</Td>
+            </Tr>
+            <Tr>
+                <Td>29</Td>
+                <Td>2015</Td>
+                <Td>Eufaula (Wallace Community College Dothan)</Td>
+                <Td>Dr. Annette Cederholm, Snead State Community College</Td>
+                <Td>Ms. Angel Jowers, University of West Alabama</Td>
+                <Td>Back to the Future</Td>
+            </Tr>
+            <Tr>
+                <Td>28</Td>
+                <Td>2014</Td>
+                <Td>
+                    Huntsville (J.F. Drake State Community and Technical
+                    College)
+                </Td>
+                <Td>Dr. Jon C. Acker, The University of Alabama</Td>
+                <Td>Dr. Annette Cederholm, Snead State Community College</Td>
+                <Td>Institutional Research…and Beyond!</Td>
+            </Tr>
+            <Tr>
+                <Td>27</Td>
+                <Td>2013</Td>
+                <Td>The University of Alabama</Td>
+                <Td>Mr. John McIntosh, Northwest-Shoals Community College</Td>
+                <Td>Dr. Jon C. Acker, The University of Alabama</Td>
+                <Td>Moving the Ball Forward</Td>
+            </Tr>
+        </Tbody>
+    </Table>
+);
 
 ```
 
 ## Development
 
-**NOTE:** The source code for the component is in `src`. A transpiled version (generated with Babel) is available in `dist`, which can be included without the need for any build system.
+**NOTE:** The source code for the component is in `src`. Built version with rollup is available in `dist`.
 
-To build, watch and serve the examples (which will also watch the component source), run `npm start`. If you just want to watch changes to `src` and rebuild `dist`, run `npm run watch` (this is useful if you are working with `npm link`).
-
-## Contributing
-Please help turn the tables on unresponsive data! Submit any issues and/or make a pull request!
+To build, watch and serve the examples (which will also watch the component source), run `npm start`. If you just want to watch changes to `src` and rebuild `dist`, run `npm run watch`.
 
 ## License
 
